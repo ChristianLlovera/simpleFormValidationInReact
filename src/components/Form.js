@@ -35,9 +35,9 @@ const Form = props => {
             <h1 className="text-center">Form Validation</h1>
             <form>
                 <InputText name='Name' />
-                <h3>Email:</h3>
-                <h3>Phone:</h3>
-                <h3>Blog URL:</h3>
+                <InputText name='Email' />
+                <InputText name='Phone' />
+                <InputText name='Url' />
                 <div className="small-6 small-centered text-center columns">
                     <a href="#" className="button success expand round text-center">Verify</a>
                 </div>
