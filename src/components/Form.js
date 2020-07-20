@@ -1,37 +1,50 @@
-import React, {Component} from 'react';
-import {PropTypes} from 'prop-types';
+import React, { useEffect, useState, useRef } from 'react'
 
-class Form extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isEmailValid: false,
-            isNameValid: false,
-            isPhoneValid: false,
-            isUrlValid: false,
-        };
+const InputText = props => {
 
-    }
-    
-    render() {
-        return (
-            <div className="row">
+    const { name } = props
+
+    const [value, setValue] = useState()
+    const elem = useRef()
+
+    useEffect(() => {
+        console.log(elem)
+    }, [])
+
+
+    return (
+        <input type="text" placeholder={name} ref={elem} value={value} onChange={e => setValue(e.target.value)} />
+    )
+}
+
+const Form = props => {
+
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         isEmailValid: false,
+    //         isNameValid: false,
+    //         isPhoneValid: false,
+    //         isUrlValid: false,
+    //     };
+
+    // }
+
+    return (
+        <div className="row">
             <h1 className="text-center">Form Validation</h1>
             <form>
-                <h3>Name:
-                </h3>
-                <h3>Email:
-                </h3>
-                <h3>Phone:
-                </h3>
-                <h3>Blog URL:
-                </h3>
+                <InputText name='Name' />
+                <h3>Email:</h3>
+                <h3>Phone:</h3>
+                <h3>Blog URL:</h3>
                 <div className="small-6 small-centered text-center columns">
                     <a href="#" className="button success expand round text-center">Verify</a>
                 </div>
             </form>
-        </div>);
-    }
+        </div>)
+
 }
+
 
 export default Form;
