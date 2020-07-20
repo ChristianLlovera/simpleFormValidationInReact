@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
 import Form from './components/Form'
 import Message from './components/Message'
 
-class App extends Component {
 
-    render() {
-        return (
-            <div>
-                <Form></Form>
-                <Message></Message>
-            </div>
-        )
-    }
+const App = () => {
+
+    const [valid, setValid] = useState()
+    const [submit, setSubmit] = useState()
+
+    return (
+        <div>
+            <Form setValid={setValid} setSubmit={setSubmit}></Form>
+            <Message valid={valid} submit={submit}></Message>
+        </div>
+    )
 }
 
-export default App;
+export default App
