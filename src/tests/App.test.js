@@ -2,28 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../App';
 import Form from '../components/Form';
-import Message from '../components/Message';
 import expect from 'expect';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { mount, shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
+import { mount } from 'enzyme';
 import { spy } from 'sinon';
 
+function flushPromises() {
+  return new Promise(resolve => setImmediate(resolve));
+}
 
 configure({ adapter: new Adapter() });
 
 describe('Form Validation <App />', () => {
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
   });
 
-	it('check default message', () => {
-  	const app = mount(<App />);
-  	let txt = app.find('.message').text()
-  	expect(txt).toEqual("Form is Incomplete!");
-	});
+  it('check default message', () => {
+    const app = mount(<App />);
+    let txt = app.find('.message').text()
+    expect(txt).toEqual("Form is Incomplete!");
+  });
 
   it('check if all forms fields exist', () => {
     const wrapper = mount(<Form />);
@@ -33,12 +35,15 @@ describe('Form Validation <App />', () => {
 
   it('check entire form validation when the form is valid', () => {
     let formSpy = spy();
+
     const form = mount(<Form isFormValid={formSpy} />);
+
     form.find('.name').simulate('change', { target: { value: 'sasrank' } });
     form.find('.email').simulate('change', { target: { value: 'aasdbc@xyz.com' } });
     form.find('.phone').simulate('change', { target: { value: '9856756756' } });
     form.find('.url').simulate('change', { target: { value: 'http://google.com' } });
     form.find('.button').simulate('click');
+
     expect(formSpy.calledWith(true)).toEqual(true);
   });
 
@@ -85,4 +90,5 @@ describe('Form Validation <App />', () => {
     form.find('.button').simulate('click');
     expect(formSpy.calledWith(true)).toEqual(false);
   });
+
 });

@@ -5,13 +5,12 @@ import Message from './components/Message'
 
 const App = () => {
 
-    const [valid, setValid] = useState()
-    const [submit, setSubmit] = useState()
+    const [valid, setValid] = useState(false)
 
     return (
         <div>
-            <Form setValid={setValid} setSubmit={setSubmit}></Form>
-            <Message valid={valid} submit={submit}></Message>
+            <Form isFormValid={setValid}></Form>
+            <Message valid={valid}></Message>
         </div>
     )
 }

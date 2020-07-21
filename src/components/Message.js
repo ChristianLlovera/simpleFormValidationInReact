@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 const Message = props => {
 
-    const { valid, submit } = props
-    const [message, setMessage] = useState('')
+    const { valid } = props
+    const [message, setMessage] = useState('Form is Incomplete!')
 
     useEffect(() => {
-        if (submit) {
-            valid ? setMessage('success') : setMessage('error')
-        }
+        valid ? setMessage('Form is complete!') : setMessage('Form is Incomplete!')
     }, [valid])
-
 
     return (
         <div>
