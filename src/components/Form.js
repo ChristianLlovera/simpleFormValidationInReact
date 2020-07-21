@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import Validator from 'validatorjs'
+import { element } from 'prop-types'
 
 
 const Form = props => {
@@ -9,11 +10,12 @@ const Form = props => {
 
     const getFormData = () => {
         const inputs = formRef.current.querySelectorAll('input')
-        const data = {}
 
-        Object.keys(inputs).map(element => {
-            data[inputs[element].name] = inputs[element].value
-        })
+        const data = Object.keys(inputs)
+            .reduce((obj, elm) => ({
+                ...obj,
+                [inputs[elm].name]: inputs[elm].value
+            }), {})
 
         return data
     }
